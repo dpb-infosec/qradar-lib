@@ -1,5 +1,3 @@
-from .qradarmodel import QRadarModel
-
 class QRadarModel:
     @classmethod
     def from_json(cls, json):
@@ -10,7 +8,7 @@ class QRadarModel:
                     setattr(obj, att, json.get(att, None))
             return obj
         if isinstance(json, list):
-            listofitems=[]
+            listofitems = []
             for item in json:
                 obj = cls()
                 for att in vars(obj):
