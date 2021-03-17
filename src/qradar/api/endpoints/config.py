@@ -3,6 +3,7 @@ from urllib.parse import urljoin
 from qradar.api.client import QRadarAPIClient
 from qradar.api.client import header_vars as headers
 from qradar.api.client import request_vars as params
+from qradar.models import Logsource, LogsourceGroup, Domain
 
 
 class Config(QRadarAPIClient):
@@ -25,7 +26,7 @@ class Config(QRadarAPIClient):
         """
         function_endpoint = urljoin(
             self._baseurl, 'event_sources/log_source_management/log_source_groups')
-        return self._call('GET', function_endpoint, **kwargs)
+        return LogsourceGroup.from_json(self._call('GET', function_endpoint, **kwargs))
 
     @headers('Range')
     @params('filter', 'fields', 'sort')
@@ -36,7 +37,7 @@ class Config(QRadarAPIClient):
         """
         function_endpoint = urljoin(
             self._baseurl, 'event_sources/log_source_management/log_sources')
-        return self._call('GET', function_endpoint, **kwargs)
+        return Logsource.from_json(self._call('GET', function_endpoint, **kwargs))
 
     @headers('Range')
     @params('filter', 'fields', 'sort')
@@ -49,4 +50,4 @@ class Config(QRadarAPIClient):
         """
         function_endpoint = urljoin(
             self._baseurl, 'domain_management/domains')
-        return self._call('GET', function_endpoint, **kwargs)
+        return Domain.from_json(self._call('GET', function_endpoint, **kwargs))
