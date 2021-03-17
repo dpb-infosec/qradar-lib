@@ -18,7 +18,7 @@ class QRadarAPIClient:
         """
         return self._header
 
-    def _call(self, method, url, response_type='json', **kwargs):
+    def _call(self, method, url, **kwargs):
         """
         Wrapper around the requests request method.
         :param method:  The HTTP method to use.
@@ -29,17 +29,13 @@ class QRadarAPIClient:
         header = self._header.copy()
         header.update(kwargs.pop('headers', {}))
         header.update(kwargs.pop('mime_type', {}))
-        if response_type == 'json':
-            response = requests.request(
-                method, url, headers=header, verify=self._verify, **kwargs)
-            return response.status_code, response.json()
 
-        header.update({'Accept': response_type})
         response = requests.request(
             method, url, headers=header, verify=self._verify, **kwargs)
         response.raise_for_status()
+        return response.json()
 
-        return response.status_code, response.text
+        
 
 
 def header_vars(*valid_header_fields):
