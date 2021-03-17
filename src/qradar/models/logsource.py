@@ -1,5 +1,7 @@
 from .qradarmodel import QRadarModel
-class Logsource(object):
+
+
+class Logsource(QRadarModel):
     def __init__(self, *, id=None, name=None, description=None, type_id=None, protocol_type_id=None, protocol_parameters=None, enabled=None, group_ids=None, average_eps=None):
         self.id = id
         self.name = name
