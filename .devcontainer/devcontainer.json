@@ -23,7 +23,8 @@
 	"extensions": [
 		"ms-python.python",
 		"tht13.python",
-		"littlefoxteam.vscode-python-test-adapter"
+		"littlefoxteam.vscode-python-test-adapter",
+		"njpwerner.autodocstring"
 	],
 	"postCreateCommand": "pip3 install --user -r requirements.txt",
 }
