@@ -1,3 +1,4 @@
+from typing import List, Union
 from urllib.parse import urljoin
 
 from qradar.api.client import QRadarAPIClient
@@ -12,14 +13,14 @@ class Config(QRadarAPIClient):
     """
     __baseurl = 'config/'
 
-    def __init__(self, url, header, verify):
+    def __init__(self, url: str, header, verify: bool):
         super().__init__(urljoin(url, self.__baseurl),
                          header,
                          verify)
 
     @headers('Range')
     @params('filter', 'fields')
-    def get_log_source_groups(self, *, filter=None, fields=None, Range=None, **kwargs):
+    def get_log_source_groups(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs):
         """
         GET - /config/event_sources/log_source_management/log_source_groups
         Retrieve a list of all log source groups
@@ -30,7 +31,7 @@ class Config(QRadarAPIClient):
 
     @headers('Range')
     @params('filter', 'fields', 'sort')
-    def get_log_sources(self, *, filter=None, fields=None, Range=None, sort=None, **kwargs):
+    def get_log_sources(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> Union[Logsource, List[Logsource]]:
         """
         GET - /config/event_sources/log_source_management/log_sources
         Retrieves a list of log sources
@@ -39,13 +40,18 @@ class Config(QRadarAPIClient):
             self._baseurl, 'event_sources/log_source_management/log_sources')
         return Logsource.from_json(self._call('GET', function_endpoint, **kwargs))
 
-    @headers('Range')
-    @params('filter', 'fields', 'sort')
-    def get_domains(self, *, filter=None, fields=None, Range=None, **kwargs):
+    def update_log_sources(self, log_sources: List[Logsource], **kwargs) -> List[Logsource]:
+        function_endpoint = urljoin(
+            self._baseurl, 'event_sources/log_source_management/log_sources')
+        return Logsource.from_json(self._call('PATCH', function_endpoint, **kwargs))
+
+    @ headers('Range')
+    @ params('filter', 'fields', 'sort')
+    def get_domains(self, *, filter: str = None, fields: str = None, Rang: str = None, **kwargs) -> Union[List[Domain], Domain]:
         """
         GET - /config/domain_management/domains
-        Gets the list of domains. You must have the System Administrator or Security Administrator permissions to call this endpoint if you are trying to retrieve the details of all domains. 
-        You can retrieve details of domains that are assigned to your Security Profile without having the System Administrator or Security Administrator permissions. 
+        Gets the list of domains. You must have the System Administrator or Security Administrator permissions to call this endpoint if you are trying to retrieve the details of all domains.
+        You can retrieve details of domains that are assigned to your Security Profile without having the System Administrator or Security Administrator permissions.
         If you do not have the System Administrator or Security Administrator permissions, then for each domain assigned to your security profile you can only view the values for the id and name fields. All other values return null.
         """
         function_endpoint = urljoin(
