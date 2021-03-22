@@ -1,11 +1,14 @@
+from typing import List
 from .qradarmodel import QRadarModel
 
 
 class Logsource(QRadarModel):
-    def __init__(self, *, id=None, name=None, description=None, type_id=None, protocol_type_id=None, protocol_parameters=None, enabled=None, gateway=None,
-                 internal=None, credibility=None, target_event_collector_id=None, disconnected_log_collector_id=None, coalesce_events=None, store_event_payload=None, log_source_extension_id=None,
-                 language_id=None, group_ids=None, requires_deploy=None, status=None, auto_discovered=None, average_eps=None, creation_date=None, modified_date=None, last_event_time=None,
-                 wincollect_internal_destination_id=None, wincollect_external_destination_ids=None, legacy_bulk_group_name=None, sending_ip=None, parsing_order=None):
+
+    def __init__(self, *, id: int = None, name: str = None, description: str = None, type_id: int = None, protocol_type_id: int = None, protocol_parameters: List = None, enabled: bool = None, gateway: str = None,
+                 internal: bool = None, credibility: int = None, target_event_collector_id: int = None, disconnected_log_collector_id: int = None, coalesce_events: bool = None, store_event_payload: bool = None,
+                 log_source_extension_id: int = None, language_id: int = None, group_ids: List[int] = None, requires_deploy: bool = None, status: str = None, auto_discovered: bool = None, average_eps: int = None,
+                 creation_date: str = None, modified_date: str = None, last_event_time: str = None, wincollect_internal_destination_id: int = None,
+                 wincollect_external_destination_ids: List[int] = None, legacy_bulk_group_name: str = None, sending_ip: str = None, parsing_order: int = None):
 
         self.id = id
         self.name = name

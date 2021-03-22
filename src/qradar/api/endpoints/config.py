@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 from qradar.api.client import QRadarAPIClient
 from qradar.api.client import header_vars as headers
 from qradar.api.client import request_vars as params
-from qradar.models import Logsource, LogsourceGroup, Domain
+from qradar.models import Logsource, LogsourceGroup, Domain, EventCollector, CustomProperty
 
 
 class Config(QRadarAPIClient):
@@ -17,6 +17,17 @@ class Config(QRadarAPIClient):
         super().__init__(urljoin(url, self.__baseurl),
                          header,
                          verify)
+
+    @headers('Range')
+    @params('tenant_id', 'current_security_profile', 'filter', 'fields')
+    def get_security_profiles(self, *, tenant_id: int = None, current_security_profile: bool = None, filter: str = None, fields: str = None, Range: str = None, **kwargs):
+        function_endpoint = urljoin(
+            self._baseurl, 'access/security_profiles')
+        return LogsourceGroup.from_json(self._call('GET', function_endpoint, **kwargs))
+
+    @params('fields')
+    def get_securityprofile(self, id: int, *, fields: str = None):
+        pass
 
     @headers('Range')
     @params('filter', 'fields')
@@ -45,9 +56,9 @@ class Config(QRadarAPIClient):
             self._baseurl, 'event_sources/log_source_management/log_sources')
         return Logsource.from_json(self._call('PATCH', function_endpoint, **kwargs))
 
-    @ headers('Range')
-    @ params('filter', 'fields', 'sort')
-    def get_domains(self, *, filter: str = None, fields: str = None, Rang: str = None, **kwargs) -> Union[List[Domain], Domain]:
+    @headers('Range')
+    @params('filter', 'fields', 'sort')
+    def get_domains(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> Union[List[Domain], Domain]:
         """
         GET - /config/domain_management/domains
         Gets the list of domains. You must have the System Administrator or Security Administrator permissions to call this endpoint if you are trying to retrieve the details of all domains.
@@ -57,3 +68,17 @@ class Config(QRadarAPIClient):
         function_endpoint = urljoin(
             self._baseurl, 'domain_management/domains')
         return Domain.from_json(self._call('GET', function_endpoint, **kwargs))
+
+    @headers('Range')
+    @params('filter', 'fields', 'sort')
+    def get_event_collectors(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> Union[List[EventCollector], Domain]:
+        function_endpoint = urljoin(
+            self._baseurl, 'event_sources/event_collectors')
+        return EventCollector.from_json(self._call('GET', function_endpoint, **kwargs))
+
+    @headers('Range')
+    @params('filter', 'fields', 'sort')
+    def get_custom_properties(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> Union[List[CustomProperty], Domain]:
+        function_endpoint = urljoin(
+            self._baseurl, 'event_sources/custom_properties/regex_properties')
+        return CustomProperty.from_json(self._call('GET', function_endpoint, **kwargs))

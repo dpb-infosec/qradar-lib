@@ -1,9 +1,12 @@
+from typing import List
 from .qradarmodel import QRadarModel
+
 
 class Domain(QRadarModel):
 
-    def __init__(self, *, id=None, name=None, description=None, tenant_id=None, deleted=None, event_collector_ids=None, log_source_ids=None,
-                 log_source_group_ids=None, custom_properties=None, flow_source_ids=None, flow_collector_ids=None, asset_scanner_ids=None, qvm_scanner_ids=None, flow_vlans_ids=None):
+    def __init__(self, *, id: int = None, name: str = None, description: str = None, tenant_id: int = None, deleted: bool = None, event_collector_ids: List[int] = None, log_source_ids: List[int] = None,
+                 log_source_group_ids: List[int] = None, custom_properties: List = None, flow_source_ids: List[int] = None, flow_collector_ids: List[int] = None, asset_scanner_ids: List[int] = None,
+                 qvm_scanner_ids: List[int] = None, flow_vlans_ids: List[int] = None):
 
         self.id = id
         self.name = name
@@ -19,4 +22,3 @@ class Domain(QRadarModel):
         self.asset_scanner_ids = asset_scanner_ids
         self.qvm_scanner_ids = qvm_scanner_ids
         self.flow_vlans_ids = flow_vlans_ids
-

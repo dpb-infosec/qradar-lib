@@ -1,8 +1,10 @@
+from typing import List
 from .qradarmodel import QRadarModel
+
 
 class LogsourceGroup(QRadarModel):
 
-    def __init__(self, *, id=None, name=None, description=None, parent_id=None, owner=None, modification_date=None, child_groups=None):
+    def __init__(self, *, id: int = None, name: str = None, description: str = None, parent_id: int = None, owner: str = None, modification_date: str = None, child_groups: List = None):
         self.id = id
         self.name = name
         self.description = description
