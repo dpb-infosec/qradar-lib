@@ -1,3 +1,4 @@
+from typing import List
 from urllib.parse import urljoin
 
 from qradar.api.client import QRadarAPIClient
@@ -19,7 +20,7 @@ class Access(QRadarAPIClient):
 
     @headers('Range')
     @params('filter', 'fields')
-    def get_login_attempts(self, *, filter=None, fields=None, Range=None, **kwargs):
+    def get_login_attempts(self, *, filter=None, fields=None, Range=None, **kwargs) -> List[LoginAttempt]:
         """
         GET - /access/login_attempts
         Gets the list of login attempts

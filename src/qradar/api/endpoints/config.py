@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List
 from urllib.parse import urljoin
 
 from qradar.api.client import QRadarAPIClient
@@ -19,19 +19,8 @@ class Config(QRadarAPIClient):
                          verify)
 
     @headers('Range')
-    @params('tenant_id', 'current_security_profile', 'filter', 'fields')
-    def get_security_profiles(self, *, tenant_id: int = None, current_security_profile: bool = None, filter: str = None, fields: str = None, Range: str = None, **kwargs):
-        function_endpoint = urljoin(
-            self._baseurl, 'access/security_profiles')
-        return LogsourceGroup.from_json(self._call('GET', function_endpoint, **kwargs))
-
-    @params('fields')
-    def get_securityprofile(self, id: int, *, fields: str = None):
-        pass
-
-    @headers('Range')
     @params('filter', 'fields')
-    def get_log_source_groups(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs):
+    def get_log_source_groups(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List[LogsourceGroup]:
         """
         GET - /config/event_sources/log_source_management/log_source_groups
         Retrieve a list of all log source groups
@@ -42,7 +31,7 @@ class Config(QRadarAPIClient):
 
     @headers('Range')
     @params('filter', 'fields', 'sort')
-    def get_log_sources(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> Union[Logsource, List[Logsource]]:
+    def get_log_sources(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List[Logsource]:
         """
         GET - /config/event_sources/log_source_management/log_sources
         Retrieves a list of log sources
@@ -58,7 +47,7 @@ class Config(QRadarAPIClient):
 
     @headers('Range')
     @params('filter', 'fields', 'sort')
-    def get_domains(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> Union[List[Domain], Domain]:
+    def get_domains(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List[Domain]:
         """
         GET - /config/domain_management/domains
         Gets the list of domains. You must have the System Administrator or Security Administrator permissions to call this endpoint if you are trying to retrieve the details of all domains.
@@ -71,14 +60,14 @@ class Config(QRadarAPIClient):
 
     @headers('Range')
     @params('filter', 'fields', 'sort')
-    def get_event_collectors(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> Union[List[EventCollector], Domain]:
+    def get_event_collectors(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List[EventCollector]:
         function_endpoint = urljoin(
             self._baseurl, 'event_sources/event_collectors')
         return EventCollector.from_json(self._call('GET', function_endpoint, **kwargs))
 
     @headers('Range')
     @params('filter', 'fields', 'sort')
-    def get_custom_properties(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> Union[List[CustomProperty], Domain]:
+    def get_custom_properties(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List[CustomProperty]:
         function_endpoint = urljoin(
             self._baseurl, 'event_sources/custom_properties/regex_properties')
         return CustomProperty.from_json(self._call('GET', function_endpoint, **kwargs))

@@ -23,10 +23,17 @@ the package contains
 sudo pip3 install qradar-api
 ```
 
+## How to use
+
+```python
+
+
+```
+
 ## Roadmap
 
 - [ ] Set up decent packaging :package:
-- [ ] Implement all models &  GET endpoints :rocket:
+- [ ] Implement all models & GET endpoints :rocket:
 - [ ] Implement all post endpoints :pencil:
 - [ ] Convince IBM to contribute when creating a new API version :pray:
 - [ ] Write a nice set of unit tests :clown_face:
