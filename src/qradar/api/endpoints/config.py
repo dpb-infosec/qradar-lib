@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 from qradar.api.client import QRadarAPIClient
 from qradar.api.client import header_vars as headers
 from qradar.api.client import request_vars as params
-from qradar.models import Logsource, LogsourceGroup, Domain, EventCollector, CustomProperty
+from qradar.models import Logsource, LogsourceGroup, Domain, EventCollector, CustomProperty, LogsourceType
 
 
 class Config(QRadarAPIClient):
@@ -71,3 +71,10 @@ class Config(QRadarAPIClient):
         function_endpoint = urljoin(
             self._baseurl, 'event_sources/custom_properties/regex_properties')
         return CustomProperty.from_json(self._call('GET', function_endpoint, **kwargs))
+
+    @headers('Range')
+    @params('filter', 'fields', 'sort')
+    def get_log_source_type(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List[LogsourceType]:
+        function_endpoint = urljoin(
+            self._baseurl, 'event_sources/log_source_management/log_source_types')
+        return LogsourceType.from_json(self._call('GET', function_endpoint, **kwargs))
