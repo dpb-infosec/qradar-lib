@@ -1,10 +1,10 @@
 from typing import List
 from urllib.parse import urljoin
-
+import json
 from qradar.api.client import QRadarAPIClient
 from qradar.api.client import header_vars as headers
 from qradar.api.client import request_vars as params
-from qradar.models import Logsource, LogsourceGroup, Domain, EventCollector, CustomProperty, LogsourceType
+from qradar.models import Logsource, LogsourceGroup, Domain, EventCollector, CustomProperty, LogsourceType, NetworkHierarchy
 
 
 class Config(QRadarAPIClient):
@@ -78,3 +78,20 @@ class Config(QRadarAPIClient):
         function_endpoint = urljoin(
             self._baseurl, 'event_sources/log_source_management/log_source_types')
         return LogsourceType.from_json(self._call('GET', function_endpoint, **kwargs))
+
+    @params('fields')
+    def get_network_hierarchy(self, *, fields: str = None, **kwargs) -> List['NetworkHierarchy']:
+        function_endpoint = urljoin(
+            self._baseurl, 'network_hierarchy/staged_networks')
+        return NetworkHierarchy.from_json(self._call('GET', function_endpoint, **kwargs))
+
+    @headers('fields')
+    def put_network_hierarchy_staged_networks(self, *, network_hierarchy: List['NetworkHierarchy'], fields=None, **kwargs):
+        """
+        PUT /config/network_hierarchy/staged_networks
+        Replaces the current network hierarchy with the input that is provided.
+        """
+        function_endpoint = urljoin(
+            self._baseurl, 'network_hierarchy/staged_networks')
+
+        return self._call('PUT', function_endpoint, json=network_hierarchy, **kwargs)
