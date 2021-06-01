@@ -5,7 +5,7 @@ from .qradarmodel import QRadarModel
 class LogsourceType(QRadarModel):
 
     def __init__(self, *, id: int = None, name: str = None, internal: bool = None, custom: bool = None, protocol_types: List = None,
-                 default_protocol_id: int = None, log_source_extension_id: int = None, supported_language_ids: List = None, version: str = None):
+                 default_protocol_id: int = None, log_source_extension_id: int = None, supported_language_ids: List = None, version: str = None) -> None:
         self.id = id
         self.name = name
         self.internal = internal
