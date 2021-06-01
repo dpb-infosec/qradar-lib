@@ -5,6 +5,7 @@ from qradar.models import log_source
 from qradar.models import log_source_group
 from qradar.models import log_source_type
 from qradar.models import login_attempt
+from qradar.models import network_hierarchy
 from qradar.models import qradarmodel
 from qradar.models import saved_search_group
 
@@ -15,11 +16,13 @@ from qradar.models.log_source import (Logsource,)
 from qradar.models.log_source_group import (LogsourceGroup,)
 from qradar.models.log_source_type import (LogsourceType,)
 from qradar.models.login_attempt import (LoginAttempt,)
+from qradar.models.network_hierarchy import (NetworkHierarchy,)
 from qradar.models.qradarmodel import (QRadarModel,)
 from qradar.models.saved_search_group import (SavedSearchGroup,)
 
 __all__ = ['CustomProperty', 'Domain', 'EventCollector', 'LoginAttempt',
-           'Logsource', 'LogsourceGroup', 'LogsourceType', 'QRadarModel',
-           'SavedSearchGroup', 'custom_property', 'domain', 'event_collector',
-           'log_source', 'log_source_group', 'log_source_type',
-           'login_attempt', 'qradarmodel', 'saved_search_group']
+           'Logsource', 'LogsourceGroup', 'LogsourceType', 'NetworkHierarchy',
+           'QRadarModel', 'SavedSearchGroup', 'custom_property', 'domain',
+           'event_collector', 'log_source', 'log_source_group',
+           'log_source_type', 'login_attempt', 'network_hierarchy',
+           'qradarmodel', 'saved_search_group']
