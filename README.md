@@ -32,7 +32,8 @@ sudo pip3 install qradar-api
 
 ## Roadmap
 
-- [ ] Set up decent packaging :package:
+- [x] Set up decent packaging :package:
+- [ ] Fix typing for ease-of-use
 - [ ] Implement all models & GET endpoints :rocket:
 - [ ] Implement all post endpoints :pencil:
 - [ ] Convince IBM to contribute when creating a new API version :pray:
