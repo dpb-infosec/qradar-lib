@@ -20,7 +20,7 @@ class Config(QRadarAPIClient):
 
     @headers('Range')
     @params('filter', 'fields')
-    def get_log_source_groups(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List[LogsourceGroup]:
+    def get_log_source_groups(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List['LogsourceGroup']:
         """
         GET - /config/event_sources/log_source_management/log_source_groups
         Retrieve a list of all log source groups
@@ -31,7 +31,7 @@ class Config(QRadarAPIClient):
 
     @headers('Range')
     @params('filter', 'fields', 'sort')
-    def get_log_sources(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List[Logsource]:
+    def get_log_sources(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List['Logsource']:
         """
         GET - /config/event_sources/log_source_management/log_sources
         Retrieves a list of log sources
@@ -40,14 +40,14 @@ class Config(QRadarAPIClient):
             self._baseurl, 'event_sources/log_source_management/log_sources')
         return Logsource.from_json(self._call('GET', function_endpoint, **kwargs))
 
-    def update_log_sources(self, log_sources: List[Logsource], **kwargs) -> List[Logsource]:
+    def update_log_sources(self, log_sources: List[Logsource], **kwargs) -> List['Logsource']:
         function_endpoint = urljoin(
             self._baseurl, 'event_sources/log_source_management/log_sources')
         return Logsource.from_json(self._call('PATCH', function_endpoint, **kwargs))
 
     @headers('Range')
     @params('filter', 'fields', 'sort')
-    def get_domains(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List[Domain]:
+    def get_domains(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List['Domain']:
         """
         GET - /config/domain_management/domains
         Gets the list of domains. You must have the System Administrator or Security Administrator permissions to call this endpoint if you are trying to retrieve the details of all domains.
@@ -60,21 +60,21 @@ class Config(QRadarAPIClient):
 
     @headers('Range')
     @params('filter', 'fields', 'sort')
-    def get_event_collectors(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List[EventCollector]:
+    def get_event_collectors(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List['EventCollector']:
         function_endpoint = urljoin(
             self._baseurl, 'event_sources/event_collectors')
         return EventCollector.from_json(self._call('GET', function_endpoint, **kwargs))
 
     @headers('Range')
     @params('filter', 'fields', 'sort')
-    def get_custom_properties(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List[CustomProperty]:
+    def get_custom_properties(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List['CustomProperty']:
         function_endpoint = urljoin(
             self._baseurl, 'event_sources/custom_properties/regex_properties')
         return CustomProperty.from_json(self._call('GET', function_endpoint, **kwargs))
 
     @headers('Range')
     @params('filter', 'fields', 'sort')
-    def get_log_source_type(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List[LogsourceType]:
+    def get_log_source_type(self, *, filter: str = None, fields: str = None, Range: str = None, **kwargs) -> List['LogsourceType']:
         function_endpoint = urljoin(
             self._baseurl, 'event_sources/log_source_management/log_source_types')
         return LogsourceType.from_json(self._call('GET', function_endpoint, **kwargs))
