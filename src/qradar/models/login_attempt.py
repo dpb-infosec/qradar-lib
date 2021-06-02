@@ -3,7 +3,7 @@ from .qradarmodel import QRadarModel
 
 class LoginAttempt(QRadarModel):
 
-    def __init__(self, *, attempt_time: int = None, user_id: int = None, remote_ip: str = None, attempt_result: str = None, attempt_method: str = None):
+    def __init__(self, *, attempt_time: int = None, user_id: int = None, remote_ip: str = None, attempt_result: str = None, attempt_method: str = None) -> None:
         """
 
         Args:

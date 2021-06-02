@@ -4,7 +4,7 @@ from .qradarmodel import QRadarModel
 
 class SavedSearchGroup(QRadarModel):
 
-    def __init__(self, *, id: int = None, parent_id: int = None, type: str = None, level: int = None, name: str = None, description: str = None,  owner: str = None, modified_time: int = None, child_group_ids: List[int] = None):
+    def __init__(self, *, id: int = None, parent_id: int = None, type: str = None, level: int = None, name: str = None, description: str = None,  owner: str = None, modified_time: int = None, child_group_ids: List[int] = None) -> None:
         """
         Args:
             id (int, optional): The ID of the group. Defaults to None.

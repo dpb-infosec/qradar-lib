@@ -6,7 +6,7 @@ class Domain(QRadarModel):
 
     def __init__(self, *, id: int = None, name: str = None, description: str = None, tenant_id: int = None, deleted: bool = None, event_collector_ids: List[int] = None, log_source_ids: List[int] = None,
                  log_source_group_ids: List[int] = None, custom_properties: List = None, flow_source_ids: List[int] = None, flow_collector_ids: List[int] = None, asset_scanner_ids: List[int] = None,
-                 qvm_scanner_ids: List[int] = None, flow_vlans_ids: List[int] = None):
+                 qvm_scanner_ids: List[int] = None, flow_vlans_ids: List[int] = None) -> None:
 
         self.id = id
         self.name = name

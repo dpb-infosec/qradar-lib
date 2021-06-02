@@ -86,12 +86,12 @@ class Config(QRadarAPIClient):
         return NetworkHierarchy.from_json(self._call('GET', function_endpoint, **kwargs))
 
     @headers('fields')
-    def put_network_hierarchy_staged_networks(self, *, network_hierarchy: List['NetworkHierarchy'], fields=None, **kwargs):
+    def put_network_hierarchy_staged_networks(self, network_hierarchy: List['NetworkHierarchy'], *, fields=None, **kwargs):
         """
         PUT /config/network_hierarchy/staged_networks
         Replaces the current network hierarchy with the input that is provided.
         """
         function_endpoint = urljoin(
             self._baseurl, 'network_hierarchy/staged_networks')
-
-        return self._call('PUT', function_endpoint, json=network_hierarchy, **kwargs)
+        json_string = json.dumps([ob.to_json() for ob in network_hierarchy])
+        return self._call('PUT', function_endpoint, json=json_string, **kwargs)

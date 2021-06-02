@@ -4,7 +4,7 @@ from .qradarmodel import QRadarModel
 class CustomProperty(QRadarModel):
 
     def __init__(self, *, id: int = None, identifier: str = None, name: str = None, username: str = None, description: str = None, property_type: str = None,
-                 use_for_rule_engine: bool = None, datetime_format: str = None, locale: str = None, auto_discovered: bool = None):
+                 use_for_rule_engine: bool = None, datetime_format: str = None, locale: str = None, auto_discovered: bool = None) -> None:
         self.id = id
         self.identifier = identifier
         self.name = name

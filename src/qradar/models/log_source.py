@@ -8,7 +8,7 @@ class Logsource(QRadarModel):
                  internal: bool = None, credibility: int = None, target_event_collector_id: int = None, disconnected_log_collector_id: int = None, coalesce_events: bool = None, store_event_payload: bool = None,
                  log_source_extension_id: int = None, language_id: int = None, group_ids: List[int] = None, requires_deploy: bool = None, status: str = None, auto_discovered: bool = None, average_eps: int = None,
                  creation_date: str = None, modified_date: str = None, last_event_time: str = None, wincollect_internal_destination_id: int = None,
-                 wincollect_external_destination_ids: List[int] = None, legacy_bulk_group_name: str = None, sending_ip: str = None, parsing_order: int = None):
+                 wincollect_external_destination_ids: List[int] = None, legacy_bulk_group_name: str = None, sending_ip: str = None, parsing_order: int = None) -> None:
 
         self.id = id
         self.name = name
